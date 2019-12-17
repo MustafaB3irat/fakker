@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbar1">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="btn ml-2 btn-warning" href="#">Login</a></li>
+                <a class="btn ml-2 btn-warning" href="{{url('/login')}}" >Login</a></li>
         </ul>
     </div>
 </nav>
