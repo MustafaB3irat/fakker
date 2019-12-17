@@ -14,3 +14,5 @@
 Route::get('/' , 'MainController@index');
 
 Route::get('/login' , 'MainController@login');
+
+Route::resource('data' , 'DataController');
