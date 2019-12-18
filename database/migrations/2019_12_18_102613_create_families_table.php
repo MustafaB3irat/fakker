@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataTable extends Migration
+class CreateFamiliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateDataTable extends Migration
      */
     public function up()
     {
-        Schema::create('data', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('families', function (Blueprint $table) {
+            $table->integer('id' , false , true)->primary();
             $table->string('name')->unique();
             $table->string('area');
             $table->string('address');
@@ -24,6 +24,7 @@ class CreateDataTable extends Migration
             $table->string('state');
             $table->string('motherWork');
             $table->integer('workState',false,true);
+            $table->string('workDetails');
             $table->string('incomeSrc');
             $table->integer('boysNum',false,true);
             $table->string('boysAges');
@@ -31,7 +32,9 @@ class CreateDataTable extends Migration
             $table->string('girlsAges');
             $table->string('assuranceType');
             $table->integer('isThereUniStudent',false,true);
+            $table->string('studentDetails');
             $table->string('isThereSickPeople_Drugs');
+            $table->string('sicknessDetails');
             $table->timestamps();
         });
     }
@@ -43,6 +46,6 @@ class CreateDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data');
+        Schema::dropIfExists('families');
     }
 }
