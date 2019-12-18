@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Family;
+use App\Visit;
+
 class DataController extends Controller
 {
     /**
@@ -14,6 +17,8 @@ class DataController extends Controller
     public function index()
     {
         //
+
+
     }
 
     /**
@@ -23,7 +28,7 @@ class DataController extends Controller
      */
     public function create()
     {
-        //
+        return view('Family.create');
     }
 
     /**

@@ -6,7 +6,9 @@
 
     <title>{{config('app.name',  'fakker')}}</title>
     <!-- Styles -->
-    <link rel="stylesheet" href="{{assets('css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
+    @yield('style')
 </head>
 <body>
 
