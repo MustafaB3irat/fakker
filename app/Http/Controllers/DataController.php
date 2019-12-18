@@ -40,6 +40,53 @@ class DataController extends Controller
     public function store(Request $request)
     {
         //
+
+
+        $this->validate($request,[
+            'name'=> 'required',
+            'phone'=>'required',
+            'area'=>'required',
+            'address'=>'required',
+            'workState'=>'required',
+            'hawya'=>'required',
+            'state'=>'required',
+            'houseHolderWork'=>'required',
+            'motherWork'=>'required',
+            'incomeSrc'=>'required',
+            'boysNum'=>'required',
+            'boysAges'=>'required',
+            'girlsNum'=>'required',
+            'girlsAges'=>'required',
+        ]);
+
+
+
+        $family = new Family;
+
+        $family->name = $request->input('name');
+        $family->area = $request->input('area');
+        $family->address = $request->input('address');
+        $family->phone = $request->input('phone');
+        $family->hawya = $request->input('hawya');
+        $family->houseHolderWork = $request->input('houseHolderWork');
+        $family->state = $request->input('state');
+        $family->motherWork = $request->input('motherWork');
+        $family->workState = $request->input('workState');
+        $family->workDetails = $request->input('workDetails');
+        $family->incomeSrc = $request->input('incomeSrc');
+        $family->boysNum = $request->input('boysNum');
+        $family->boysAges = $request->input('boysAges');
+        $family->girlsNum = $request->input('girlsAges');
+        $family->assuranceType = $request->input('assuranceType');
+        $family->isThereUniStudent = $request->input('name');
+        $family->studentDetails = $request->input('studentDetails');
+        $family->isThereSickPeople_Drugs = $request->input('isThereSickPeople_Drugs');
+        $family->sicknessDetails = $request->input('sicknessDetails');
+
+
+        $family->save();
+
+            return redirect('/');
     }
 
     /**
