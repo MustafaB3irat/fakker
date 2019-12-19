@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Family;
 use Illuminate\Http\Request;
 
-use App\Family;
+
 use App\Visit;
+
 
 class DataController extends Controller
 {
@@ -17,7 +19,9 @@ class DataController extends Controller
     public function index()
     {
         //
+        $families = Family::query()->orderBy('name' , 'asc')->paginate(1);
 
+        return view('Family.view')->with('families' ,$families);
 
     }
 
@@ -31,12 +35,10 @@ class DataController extends Controller
         return view('Family.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+
     public function store(Request $request)
     {
         //
@@ -72,13 +74,13 @@ class DataController extends Controller
         $family->state = $request->input('state');
         $family->motherWork = $request->input('motherWork');
         $family->workState = $request->input('workState');
-        $family->workDetails = $request->input('workDetails');
         $family->incomeSrc = $request->input('incomeSrc');
         $family->boysNum = $request->input('boysNum');
         $family->boysAges = $request->input('boysAges');
-        $family->girlsNum = $request->input('girlsAges');
+        $family->girlsNum = $request->input('girlsNum');
+        $family->girlsAges = $request->input('girlsAges');
         $family->assuranceType = $request->input('assuranceType');
-        $family->isThereUniStudent = $request->input('name');
+        $family->isThereUniStudent = $request->input('isThereUniStudent');
         $family->studentDetails = $request->input('studentDetails');
         $family->isThereSickPeople_Drugs = $request->input('isThereSickPeople_Drugs');
         $family->sicknessDetails = $request->input('sicknessDetails');
@@ -86,7 +88,7 @@ class DataController extends Controller
 
         $family->save();
 
-            return redirect('/');
+            return redirect('/data')->with('success' , 'Added Successfully!');
     }
 
     /**
@@ -98,6 +100,8 @@ class DataController extends Controller
     public function show($id)
     {
         //
+
+        return "gjfgfghfhfgff";
     }
 
     /**

@@ -24,7 +24,6 @@ class CreateFamiliesTable extends Migration
             $table->string('state');
             $table->string('motherWork');
             $table->integer('workState',false,true);
-            $table->string('workDetails');
             $table->string('incomeSrc');
             $table->integer('boysNum',false,true);
             $table->string('boysAges');

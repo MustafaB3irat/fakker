@@ -31,3 +31,9 @@ h5{
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+hr{
+    border: 2px #5F5F5F solid;
+
+}

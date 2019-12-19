@@ -11,17 +11,6 @@
 @section('content')
 
 
-    @if(count($errors)>0)
-        <div class="alert alert-danger" style="margin-top: 20px;text-align: right"><strong lang="ar" >الرجاء التأكد من البيانات المدخلة</strong></div>
-
-        @foreach($errors as $error)
-            <div class="alert alert-danger" style="margin-top: 20px;text-align: right"><strong lang="ar" >{{$error}}</strong></div>
-            @endforeach
-        @endif
-
-
-
-
     <div class="row" style="justify-content: center;margin-top: 15px;">
 
         <h2 lang="ar">تسجيل عائلة جديدة</h2>
@@ -105,9 +94,9 @@
                                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
 
-                                            <label class="btn btn-success" value="1" style="margin-left: 10px; width: 100px"
+                                            <label class="btn btn-success" style="margin-left: 10px; width: 100px"
                                                    id="yes_label">
-                                                <input type="radio" name="workState" id="yes" autocomplete="off" checked
+                                                <input type="radio" name="workState" id="yes" value="1" autocomplete="off" checked
                                                        onclick=" document.getElementById('no_label').classList.remove('btn-success');document.getElementById('no_label').classList.add('btn-danger');document.getElementById('yes_label').classList.remove('btn-danger');
             document.getElementById('yes_label').classList.add('btn-success');"> نعم
                                             </label>
@@ -129,6 +118,9 @@
 
 
                             </div>
+
+
+                            <hr/>
 
 
                             <div class="row">
@@ -194,6 +186,8 @@
                             </div>
 
 
+                            <hr/>
+
                             <div class="row">
 
                                 <div class="col">
@@ -240,6 +234,7 @@
                             </div>
 
 
+                            <hr/>
 
 
 
@@ -260,13 +255,13 @@
                                                    id="yes_label1">
                                                 <input type="radio" name="assuranceState" id="yes1"  value="1"autocomplete="off" checked
                                                        onclick=" document.getElementById('no_label1').classList.remove('btn-success');document.getElementById('no_label1').classList.add('btn-danger');document.getElementById('yes_label1').classList.remove('btn-danger');
-            document.getElementById('yes_label1').classList.add('btn-success');"> نعم
+            document.getElementById('yes_label1').classList.add('btn-success');"> تمتلك
                                             </label>
 
                                             <label class="btn btn-danger" style="width: 100px" id="no_label1">
                                                 <input type="radio" name="assuranceState" id="no1" value="0" autocomplete="off"
                                                        onclick=" document.getElementById('yes_label1').classList.remove('btn-success');document.getElementById('yes_label1').classList.add('btn-danger');document.getElementById('no_label1').classList.remove('btn-danger');
-            document.getElementById('no_label1').classList.add('btn-success');"> لا
+            document.getElementById('no_label1').classList.add('btn-success');">  لا تمتلك
                                             </label>
 
 
@@ -316,13 +311,13 @@
                                                        id="yes_label2">
                                                     <input type="radio" name="isThereUniStudent" id="yes2" value="1" autocomplete="off" checked
                                                            onclick=" document.getElementById('no_label2').classList.remove('btn-success');document.getElementById('no_label2').classList.add('btn-danger');document.getElementById('yes_label2').classList.remove('btn-danger');
-            document.getElementById('yes_label2').classList.add('btn-success');"> نعم
+            document.getElementById('yes_label2').classList.add('btn-success');"> يوجد
                                                 </label>
 
                                                 <label class="btn btn-danger" style="width: 100px" id="no_label2">
                                                     <input type="radio" name="isThereUniStudent" id="no2" value="0" autocomplete="off"
                                                            onclick=" document.getElementById('yes_label2').classList.remove('btn-success');document.getElementById('yes_label2').classList.add('btn-danger');document.getElementById('no_label2').classList.remove('btn-danger');
-            document.getElementById('no_label2').classList.add('btn-success');"> لا
+            document.getElementById('no_label2').classList.add('btn-success');"> لا يوجد
                                                 </label>
 
 
@@ -377,7 +372,7 @@
 
                                                 <label class="btn btn-danger" style="width: 100px" id="no_label3">
                                                     <input type="radio" name="isThereSickPeople_Drugs" id="no3" value="0" autocomplete="off"
-                                                           onclick=" document.getElementById('yes_label2').classList.remove('btn-success');document.getElementById('yes_label3').classList.add('btn-danger');document.getElementById('no_label3').classList.remove('btn-danger');
+                                                           onclick=" document.getElementById('yes_label3').classList.remove('btn-success');document.getElementById('yes_label3').classList.add('btn-danger');document.getElementById('no_label3').classList.remove('btn-danger');
             document.getElementById('no_label3').classList.add('btn-success');"> لا
                                                 </label>
 
