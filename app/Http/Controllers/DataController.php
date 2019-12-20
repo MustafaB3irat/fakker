@@ -19,9 +19,9 @@ class DataController extends Controller
     public function index()
     {
         //
-        $families = Family::query()->orderBy('name' , 'asc')->paginate(1);
+        $families = Family::query()->orderBy('name', 'asc')->paginate(1);
 
-        return view('Family.view')->with('families' ,$families);
+        return view('Family.view')->with('families', $families);
 
     }
 
@@ -36,31 +36,27 @@ class DataController extends Controller
     }
 
 
-
-
-
     public function store(Request $request)
     {
         //
 
 
-        $this->validate($request,[
-            'name'=> 'required',
-            'phone'=>'required',
-            'area'=>'required',
-            'address'=>'required',
-            'workState'=>'required',
-            'hawya'=>'required',
-            'state'=>'required',
-            'houseHolderWork'=>'required',
-            'motherWork'=>'required',
-            'incomeSrc'=>'required',
-            'boysNum'=>'required',
-            'boysAges'=>'required',
-            'girlsNum'=>'required',
-            'girlsAges'=>'required',
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'area' => 'required',
+            'address' => 'required',
+            'workState' => 'required',
+            'hawya' => 'required',
+            'state' => 'required',
+            'houseHolderWork' => 'required',
+            'motherWork' => 'required',
+            'incomeSrc' => 'required',
+            'boysNum' => 'required',
+            'boysAges' => 'required',
+            'girlsNum' => 'required',
+            'girlsAges' => 'required',
         ]);
-
 
 
         $family = new Family;
@@ -88,26 +84,28 @@ class DataController extends Controller
 
         $family->save();
 
-            return redirect('/data')->with('success' , 'Added Successfully!');
+        return redirect('/data')->with('success', 'Added Successfully!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
 
-        return "gjfgfghfhfgff";
+        $family = Family::query()->find($id);
+
+        return view('Family.show')->with('Family', $family);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -118,8 +116,8 @@ class DataController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -130,7 +128,7 @@ class DataController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

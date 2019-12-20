@@ -2,13 +2,13 @@
 
 @section('style')
 
-    <link rel="stylesheet" href="{{asset('css/createPage/view_page_style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Family/view_page_style.css')}}">
 
     @endsection
 
 @section('content')
 
-    <h2 id="title" >معلومات العوائل</h2>
+    <h2 id="title"  lang="ar">معلومات العوائل</h2>
 
     <div class="row" id="container"  dir="rtl">
 

@@ -3,7 +3,7 @@
 
 @section('style')
 
-    <link rel="stylesheet" href="{{asset('css/createPage/create_page_style.css')}}"/>
+    <link rel="stylesheet" href="{{asset('css/Family/create_page_style.css')}}"/>
 
 @endsection
 

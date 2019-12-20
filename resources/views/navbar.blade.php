@@ -15,6 +15,9 @@
             @else
 
                 <li class="nav-item">
+                    <a class="btn  ml-2 btn-success" href="{{url('/data/')}}">Families</a></li>
+
+                <li class="nav-item">
                     <a class="btn  ml-2 btn-primary" href="{{url('/data/create')}}">Create</a></li>
 
                 <li class="nav-item">

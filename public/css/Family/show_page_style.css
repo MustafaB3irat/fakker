@@ -1,0 +1,12 @@
+#avatar{
+    width: 200px;height: 200px;
+}
+
+#img-container{
+    width: 100%;justify-content: center;margin:30px auto;
+}
+
+
+.centralize{
+    width: 100%;justify-content: center;margin:10px auto;
+}
