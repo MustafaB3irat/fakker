@@ -85,7 +85,7 @@
         </div>
 
         <div class="col">
-            <h3 lang="ar">{{$Family->houseHolderState}}</h3>
+            <h3 lang="ar">{{$Family->houseHolderWork}}</h3>
         </div>
 
     </div>

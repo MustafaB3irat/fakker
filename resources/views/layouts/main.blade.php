@@ -7,6 +7,7 @@
     <title>{{config('app.name',  'fakker')}}</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 

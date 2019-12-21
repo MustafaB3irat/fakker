@@ -18,6 +18,7 @@ class CreateVisitsTable extends Migration
             $table->unsignedInteger('family_id');
             $table->mediumText('needs');
             $table->mediumText('notes');
+            $table->date('date');
             $table->timestamps();
         });
     }

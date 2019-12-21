@@ -11,11 +11,16 @@
 |
 */
 
-Route::get('/' , 'MainController@index');
+Route::get('/', 'MainController@index');
 
-Route::get('/login' , 'MainController@login');
+Route::get('/login', 'MainController@login');
 
 
-Route::resource('data' , 'DataController')->middleware('auth');
+Route::resource('data', 'DataController')->middleware('auth');
+
+Route::get('visit/{id}', 'VisitController@index')->middleware('auth');
+Route::get('visit/create/{id}', 'VisitController@create')->middleware('auth');
+
+Route::post('visit', 'VisitController@store')->middleware('auth');
 
 Auth::routes();

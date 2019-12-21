@@ -1,0 +1,12 @@
+#header {
+
+    width: 100%;
+    justify-content: center;
+    margin: 30px auto;
+
+}
+
+label, labels {
+    float: right;
+}
+
