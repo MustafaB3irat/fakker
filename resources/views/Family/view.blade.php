@@ -14,81 +14,109 @@
 
         <div class="row" id="container" dir="rtl">
 
-            <div class="col">
-
-                <div class="row">
-
-                    <div class="col-md-2">
-                        <h3>الإسم الكامل</h3>
-                    </div>
-
-                    <div class="col-md-2">
-                        <h3>المنطقة</h3>
-                    </div>
-
-                    <div class="col-md-2">
-                        <h3>رقم الهوية</h3>
-                    </div>
-
-                    <div class="col-md-2">
-                        <h3>رقم للتواصل</h3>
-                    </div>
-
-                    <div class="col-md-2">
-                        <h3>الزيارات</h3>
-                    </div>
-
-                    <div class="col-md-2">
-                        <h3>الحالة</h3>
-                    </div>
+            <table class="table table-striped">
 
 
-                </div>
+                <thead>
 
-                <hr/>
+
+                <tr>
+
+
+                    <th>
+                        <h3>
+                            الإسم الكامل
+                        </h3>
+                    </th>
+
+                    <th>
+                        <h3>
+                            المنطقة
+                        </h3>
+                    </th>
+
+                    <th>
+                        <h3>
+                            رقم الهوية
+                        </h3>
+                    </th>
+
+                    <th>
+                        <h3>
+                            رقم للتواصل
+                        </h3>
+                    </th>
+
+                    <th>
+                        <h3>
+                            الزيارات
+                        </h3>
+                    </th>
+
+
+                    <th>
+                        <h3>
+                            الحالة
+                        </h3>
+                    </th>
+                </tr>
+
+
+                </thead>
+
+
+                <tbody>
 
 
                 @foreach($families as $family)
 
-                    <div class="row">
+                    <tr>
 
-                        <div class="col-md-2">
+                        <td>
                             <h3><a href="/data/{{$family->id}}" id="name">{{$family->name}}</a></h3>
-                        </div>
+                        </td>
 
-                        <div class="col-md-2">
+                        <td>
                             <h3>{{$family->area}}</h3>
-                        </div>
 
-                        <div class="col-md-2">
+                        </td>
+
+                        <td>
                             <h3>{{$family->hawya}}</h3>
-                        </div>
+                        </td>
 
-                        <div class="col-md-2">
+                        <td>
                             <h3>{{$family->phone}}</h3>
-                        </div>
+                        </td>
 
-                        <div class="col-md-2">
+
+                        <td>
                             <a class="btn btn-success btn" href="visit/{{$family->id}}" style="width:100%">زيارة</a>
-                        </div>
+                        </td>
 
-                        <div class="col-md-2">
+
+                        <td>
                             <h3>يستحق</h3>
-                        </div>
+                        </td>
 
 
-                    </div>
-                    <hr/>
+                    </tr>
+
                 @endforeach
 
-                <div class="row" style="justify-content: center">
 
-                    {{$families->links()}}
-                </div>
+                </tbody>
 
+            </table>
 
+            <div class="row" style="justify-content: center">
+
+                {{$families->links()}}
             </div>
+
+
         </div>
+
 
 
     @else

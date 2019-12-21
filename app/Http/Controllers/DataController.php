@@ -19,7 +19,7 @@ class DataController extends Controller
     public function index()
     {
         //
-        $families = Family::query()->orderBy('name', 'asc')->paginate(1);
+        $families = Family::query()->orderBy('name', 'asc')->paginate(10);
 
         return view('Family.view')->with('families', $families);
 
@@ -75,11 +75,27 @@ class DataController extends Controller
         $family->boysAges = $request->input('boysAges');
         $family->girlsNum = $request->input('girlsNum');
         $family->girlsAges = $request->input('girlsAges');
-        $family->assuranceType = $request->input('assuranceType');
+
+        if ($request->input('assuranceType')=="")
+            $family->assuranceType = "لا يوجد";
+        else
+            $family->assuranceType = $request->input('assuranceType');
+
+
         $family->isThereUniStudent = $request->input('isThereUniStudent');
-        $family->studentDetails = $request->input('studentDetails');
+
+        if ($request->input('isThereUniStudent') == 0)
+            $family->studentDetails = "---";
+        else
+            $family->studentDetails = $request->input('studentDetails');
+
+
         $family->isThereSickPeople_Drugs = $request->input('isThereSickPeople_Drugs');
-        $family->sicknessDetails = $request->input('sicknessDetails');
+
+        if ($request->input('isThereSickPeople_Drugs') == 0)
+            $family->sicknessDetails = "---";
+        else
+            $family->sicknessDetails = $request->input('sicknessDetails');
 
 
         $family->save();
@@ -98,6 +114,55 @@ class DataController extends Controller
         //
 
         $family = Family::query()->find($id);
+
+        if ($family->workState == 0)
+            $family->workState = "لا";
+        else
+            $family->workState = "نعم";
+
+
+        if ($family->isThereUniStudent == 0) {
+            $family->isThereUniStudent = "لا";
+            $family->studentDetails = "---";
+        } else
+            $family->isThereUniStudent = "نعم";
+
+
+        if ($family->isThereSickPeople_Drugs == 0) {
+            $family->isThereSickPeople_Drugs = "لا";
+            $family->sicknessDetails = "---";
+        } else
+            $family->isThereSickPeople_Drugs = "نعم";
+
+
+        switch ($family->state) {
+
+            case 'single':
+                {
+                    $family->state = "أعزب/عزباء";
+                    break;
+                }
+
+            case 'divorced':
+                {
+                    $family->state = "مطلق/مطلقة";
+                    break;
+                }
+
+            case 'widow':
+                {
+                    $family->state = "أرمل/أرملة";
+                    break;
+                }
+
+            case 'married':
+                {
+                    $family->state = "متزوج/متزوجة";
+                    break;
+                }
+
+        }
+
 
         return view('Family.show')->with('Family', $family);
     }
