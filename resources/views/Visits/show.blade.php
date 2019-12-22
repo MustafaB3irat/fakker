@@ -151,6 +151,10 @@
 
                                 <p>{{$visit->notes}}</p>
 
+                                <hr>
+
+                                <a href="" class="fas fa-edit" style="margin: 0 auto" lang="ar">تعديل</a>
+
                             </div>
 
                         </div>

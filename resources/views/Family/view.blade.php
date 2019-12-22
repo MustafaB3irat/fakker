@@ -8,6 +8,8 @@
 
 @section('content')
 
+    <a href="{{route('import')}}" class="btn btn-primary" id="import">Import Data</a>
+
     @if(count($families)>0)
 
         <h2 id="title" lang="ar">معلومات العوائل</h2>
@@ -110,7 +112,6 @@
             </table>
 
             <div class="row" style="justify-content: center">
-
                 {{$families->links()}}
             </div>
 

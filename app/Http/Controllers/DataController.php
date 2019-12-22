@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Family;
+use App\Imports\FamilyImport;
+use App\Imports\VisitsImport;
 use Illuminate\Http\Request;
 
 
 use App\Visit;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class DataController extends Controller
@@ -33,6 +36,7 @@ class DataController extends Controller
     public function create()
     {
         return view('Family.create');
+
     }
 
 
@@ -76,7 +80,7 @@ class DataController extends Controller
         $family->girlsNum = $request->input('girlsNum');
         $family->girlsAges = $request->input('girlsAges');
 
-        if ($request->input('assuranceType')=="")
+        if ($request->input('assuranceType') == "")
             $family->assuranceType = "لا يوجد";
         else
             $family->assuranceType = $request->input('assuranceType');
@@ -112,6 +116,7 @@ class DataController extends Controller
     public function show($id)
     {
         //
+
 
         $family = Family::query()->find($id);
 
@@ -175,7 +180,10 @@ class DataController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $family = Family::query()->find($id);
+
+        return view('Family.edit')->with('family', $family);
     }
 
     /**
@@ -188,6 +196,67 @@ class DataController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'area' => 'required',
+            'address' => 'required',
+            'workState' => 'required',
+            'hawya' => 'required',
+            'state' => 'required',
+            'houseHolderWork' => 'required',
+            'motherWork' => 'required',
+            'incomeSrc' => 'required',
+            'boysNum' => 'required',
+            'boysAges' => 'required',
+            'girlsNum' => 'required',
+            'girlsAges' => 'required',
+        ]);
+
+
+        $assuranceType = "لا يوجد";
+        $studentDetails = "---";
+        $sicknessDetails = "---";
+
+        if ($request->input('assuranceType') != "")
+            $assuranceType = $request->input('assuranceType');
+
+
+        if ($request->input('isThereUniStudent') == 1)
+            $studentDetails = $request->input('studentDetails');
+
+
+        if ($request->input('isThereSickPeople_Drugs') == 1)
+            $sicknessDetails = $request->input('sicknessDetails');
+
+
+        Family::query()->where('id', $id)->update([
+
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'phone' => $request->input('phone'),
+            'area' => $request->input('area'),
+            'hawya' => $request->input('hawya'),
+            'workState' => $request->input('workState'),
+            'assuranceType' => $assuranceType,
+            'houseHolderWork' => $request->input('houseHolderWork'),
+            'motherWork' => $request->input('motherWork'),
+            'state' => $request->input('state'),
+            'isThereSickPeople_Drugs' => $request->input('isThereSickPeople_Drugs'),
+            'sicknessDetails' => $sicknessDetails,
+            'isThereUniStudent' => $request->input('isThereUniStudent'),
+            'studentDetails' => $studentDetails,
+            'incomeSrc' => $request->input('incomeSrc'),
+            'boysNum' => $request->input('boysNum'),
+            'girlsNum' => $request->input('girlsNum'),
+            'boysAges' => $request->input('boysAges'),
+            'girlsAges' => $request->input('girlsAges'),
+
+        ]);
+
+
+        return redirect('data')->with("success", "done Successfully!");
     }
 
     /**
@@ -199,5 +268,95 @@ class DataController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function import()
+    {
+
+        return view('import');
+
+    }
+
+
+    public function importExcel(Request $request)
+    {
+
+        $this->validate($request, [
+
+            'file' => 'required|mimes:xlsx,xls,csv'
+
+        ]);
+
+
+        $families = Excel::toCollection(new FamilyImport(), $request->file('file'));
+
+        $i = 0;
+        foreach ($families[0] as $family) {
+
+
+
+            if ($family != null && $i != 0){
+
+
+                $workState = 0;
+                $isThereUniStudent = 0;
+                $isThereSickPeople_Drugs = 0;
+
+
+                if ($family[16] == "نعم")
+                    $isThereUniStudent = 1;
+
+                if ($family[9] == "نعم")
+                    $workState = 1;
+
+                if ($family[17] == "نعم")
+                    $isThereUniStudent = 1;
+
+
+
+
+                Family::query()->insert([
+
+                    'id' => $family[0],
+                    'name' => $family[1],
+                    'area' => $family[2],
+                    'address' => $family[3],
+                    'phone' => $family[4],
+                    'hawya' => $family[5],
+                    'houseHolderWork' => $family[6],
+                    'state' => $family[7],
+                    'motherWork' => $family[8],
+                    'incomeSrc' => $family[10],
+                    'boysNum' => $family[11],
+                    'boysAges' => $family[12],
+                    'girlsNum' => $family[13],
+                    'girlsAges' => $family[14],
+                    'assuranceType' => $family[15],
+                    'isThereUniStudent' => $isThereUniStudent,
+                    'studentDetails' => 'بدون',
+                    'isThereSickPeople_Drugs' => $isThereSickPeople_Drugs,
+                    'sicknessDetails' => 'بدون',
+                    'workState' => $workState,
+
+                ]);
+
+
+                Visit::query()->insert([
+
+                    'family_id' => $family[0],
+                    'date' => $family[19],
+                    'needs' => $family[20],
+                    'notes' => $family[21]
+                ]);
+            }
+
+
+            $i++;
+        }
+
+
+         return redirect('data')->with("success", "Success");
+
     }
 }

@@ -9,7 +9,11 @@
 @section('content')
 
 
-    <a href="/data" class="btn btn-primary" style="margin: 20px">back</a>
+    <a href="/data" class="btn btn-primary btn-lg" style="margin: 20px">back</a>
+
+    <a href="{{route('data.edit',$Family->id)}}" class="btn btn-success btn-lg"
+       style="margin: 20px;float: right">Edit</a>
+
 
 
     <div class="row" id="img-container">

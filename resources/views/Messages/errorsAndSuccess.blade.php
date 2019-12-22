@@ -7,6 +7,6 @@
 
 @if(session('success'))
 
-    <div class="alert alert-success" style="margin-top: 20px;text-align: right"><strong lang="ar" >تم إضافة معلومات العائلة بنجاح</strong></div>
+    <div class="alert alert-success" style="margin-top: 20px;text-align: right"><strong lang="ar" >تمت العملية بنجاح</strong></div>
 
     @endif

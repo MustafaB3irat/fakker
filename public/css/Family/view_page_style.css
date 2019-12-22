@@ -1,26 +1,35 @@
-#container{
+#container {
 
-    margin: 50px auto;width: 100%;
+    margin: 50px auto;
+    width: 100%;
 
 }
 
-#id{
-    margin: 20px auto;width: 100%;text-align: center;
+#id {
+    margin: 20px auto;
+    width: 100%;
+    text-align: center;
 }
 
-h3{
-    text-align: center!important;
+h3 {
+    text-align: center !important;
 }
 
-#name{
+#name {
 
     text-decoration: none;
     color: #1b4b72;
 }
 
-#title{
+#title {
 
     width: 100%;
     text-align: center;
     margin-top: 30px;
+}
+
+#import {
+
+    margin: 35px;
+    float: right;
 }
