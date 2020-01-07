@@ -9,10 +9,10 @@
 @section('content')
 
 
-    <div class="container my-3 py-5 text-center" >
+    <div class="container my-3 py-5 text-center">
 
 
-        <div class="row">
+        <div class="row" style="justify-content: center">
 
             <div class="col-lg-3 col-md-6" style="margin-top: 20px">
 
@@ -38,7 +38,7 @@
                                         <label for="file" lang="ar"><h3>اختر ملف المعلومات</h3></label>
 
                                         <input type="file" name="file" id="file" class="form-control-file"
-                                               accept=".xlsx,.xls,.csv">
+                                               accept=".xlsx,.xls,.csv" style="margin: 25px">
 
                                     </div>
 

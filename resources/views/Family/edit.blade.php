@@ -45,7 +45,7 @@
                           action="{{action('DataController@update',$family->id)}}"
                           method="Post">
 
-                        <input type="hidden" name="_method" value="put" />
+                        <input type="hidden" name="_method" value="put"/>
 
                         {{ csrf_field() }}
                         <fieldset>
@@ -113,7 +113,7 @@
 
                                         <h5 lang="ar">هل يعمل أحد في العائلة</h5><br/>
 
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div class="btn-group btn-group-toggle">
 
 
                                             <label style="margin-left: 10px; width: 100px;font-size: large"
@@ -277,7 +277,7 @@
 
                                             <h5 lang="ar">هل تملك العائلة تأمين صحي</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label style="margin-left: 10px; width: 100px;font-size: large"
@@ -328,7 +328,7 @@
 
                                             <h5 lang="ar">هل يوجد طالب جامعي</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label style="margin-left: 10px; width: 100px;font-size: large"
@@ -380,7 +380,7 @@
 
                                             <h5 lang="ar">هل هناك مريض بحاجة لعلاج أو دواء بشكل مزمن</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label style="margin-left: 10px; width: 100px;font-size: large"
@@ -448,7 +448,9 @@
 
         document.getElementById('no1').addEventListener("click", function () {
 
+            document.getElementById('assuranceType').value = "";
             document.getElementById('assuranceType').disabled = true;
+
 
         });
 
@@ -460,6 +462,7 @@
 
         document.getElementById('no2').addEventListener("click", function () {
 
+            document.getElementById('studentDetails').value = "";
             document.getElementById('studentDetails').disabled = true;
 
         });
@@ -478,6 +481,7 @@
 
         document.getElementById('no3').addEventListener("click", function () {
 
+            document.getElementById('sicknessDetails').value = "";
             document.getElementById('sicknessDetails').disabled = true;
 
         });

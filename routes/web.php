@@ -25,6 +25,10 @@ Route::post('visit', 'VisitController@store')->middleware('auth');
 
 Auth::routes();
 
-Route::get('import', 'DataController@import')->name('import');
+Route::get('import', 'DataController@import')->name('import')->middleware('auth');
 
-Route::post('import', 'DataController@importExcel')->name('importExcel');
+Route::post('import', 'DataController@importExcel')->name('importExcel')->middleware('auth');
+
+Route::get('visit/edit/{id}', 'VisitController@edit')->name('edit')->middleware('auth');
+
+Route::post('visit/edit', 'VisitController@update')->name('visitEdit')->middleware('auth');

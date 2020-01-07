@@ -153,7 +153,7 @@
 
                                 <hr>
 
-                                <a href="" class="fas fa-edit" style="margin: 0 auto" lang="ar">تعديل</a>
+                                <a href="edit/{{$visit->id}}" class="fas fa-edit" style="margin: 0 auto" lang="ar">تعديل</a>
 
                             </div>
 

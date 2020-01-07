@@ -19,6 +19,29 @@ class VisitController extends Controller
 
     }
 
+    public function update(Request $request)
+    {
+
+        $this->validate($request, [
+
+            'date' => 'required',
+            'needs' => 'required',
+            'notes' => 'required'
+        ]);
+
+        Visit::query()->where("id" , $request->input("id"))->update([
+
+                'date' => $request->input("date"),
+                'notes' => $request->input("notes"),
+                'needs' => $request->input("needs"),
+
+            ]
+        );
+
+        return redirect('visit/' . $request->input('family_id'))->with("success" , "success");
+
+    }
+
 
     public function create($id)
     {
@@ -50,6 +73,16 @@ class VisitController extends Controller
 
 
         return redirect('/visit/' . $request->input('id'))->with('success', 'added Successfuly');
+
+    }
+
+
+    public function edit($id)
+    {
+
+        $visit = Visit::query()->find($id);
+
+        return view("Visits.edit")->with("visit", $visit);
 
     }
 

@@ -292,11 +292,11 @@ class DataController extends Controller
         $families = Excel::toCollection(new FamilyImport(), $request->file('file'));
 
         $i = 0;
+        $errors = [];
         foreach ($families[0] as $family) {
 
-
-
-            if ($family != null && $i != 0){
+            $errors = [];
+            if ($family != null && $i != 0 && $family[0] != null) {
 
 
                 $workState = 0;
@@ -314,49 +314,65 @@ class DataController extends Controller
                     $isThereUniStudent = 1;
 
 
+                try {
+
+                    Family::query()->insert([
+
+                        'id' => $family[0],
+                        'name' => $family[1],
+                        'area' => $family[2],
+                        'address' => $family[3],
+                        'phone' => $family[4],
+                        'hawya' => $family[5],
+                        'houseHolderWork' => $family[6],
+                        'state' => $family[7],
+                        'motherWork' => $family[8],
+                        'incomeSrc' => $family[10],
+                        'boysNum' => $family[11],
+                        'boysAges' => $family[12],
+                        'girlsNum' => $family[13],
+                        'girlsAges' => $family[14],
+                        'assuranceType' => $family[15],
+                        'isThereUniStudent' => $isThereUniStudent,
+                        'studentDetails' => 'بدون',
+                        'isThereSickPeople_Drugs' => $isThereSickPeople_Drugs,
+                        'sicknessDetails' => 'بدون',
+                        'workState' => $workState,
+
+                    ]);
 
 
-                Family::query()->insert([
+                } catch (\Exception $e) {
 
-                    'id' => $family[0],
-                    'name' => $family[1],
-                    'area' => $family[2],
-                    'address' => $family[3],
-                    'phone' => $family[4],
-                    'hawya' => $family[5],
-                    'houseHolderWork' => $family[6],
-                    'state' => $family[7],
-                    'motherWork' => $family[8],
-                    'incomeSrc' => $family[10],
-                    'boysNum' => $family[11],
-                    'boysAges' => $family[12],
-                    'girlsNum' => $family[13],
-                    'girlsAges' => $family[14],
-                    'assuranceType' => $family[15],
-                    'isThereUniStudent' => $isThereUniStudent,
-                    'studentDetails' => 'بدون',
-                    'isThereSickPeople_Drugs' => $isThereSickPeople_Drugs,
-                    'sicknessDetails' => 'بدون',
-                    'workState' => $workState,
+                    $errors[0] = "error 1";
 
-                ]);
+                }
 
 
-                Visit::query()->insert([
+                try {
+                    Visit::query()->insert([
 
-                    'family_id' => $family[0],
-                    'date' => $family[19],
-                    'needs' => $family[20],
-                    'notes' => $family[21]
-                ]);
+                        'family_id' => $family[0],
+                        'date' => $family[19],
+                        'needs' => $family[20],
+                        'notes' => $family[21]
+                    ]);
+
+                } catch (\Exception $e) {
+
+                    $errors[0] = "error 2";
+                }
+
             }
 
 
             $i++;
         }
 
+        if (count($errors) > 0)
+            return redirect('data')->with("errors", $errors);
 
-         return redirect('data')->with("success", "Success");
+        return redirect('data')->with("success", "Success");
 
     }
 }
