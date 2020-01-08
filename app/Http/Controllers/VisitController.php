@@ -13,7 +13,7 @@ class VisitController extends Controller
     public function index($id)
     {
 
-        $visits = Visit::query()->orderBy('date', 'asc')->where('family_id', $id)->paginate(8);
+        $visits = Visit::query()->orderBy('date', 'desc')->where('family_id', $id)->paginate(8);
 
         return view('Visits.show')->with('Visits', $visits)->with('FamilyID', $id);
 

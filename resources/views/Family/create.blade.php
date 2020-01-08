@@ -23,7 +23,8 @@
         <div class="col-md-12 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form" dir="rtl" action="{{action('DataController@store')}}" method="post">
+                    <form accept-charset="UTF-8" role="form" dir="rtl" action="{{action('DataController@store')}}"
+                          method="post">
 
                         {{ csrf_field() }}
                         <fieldset>
@@ -96,13 +97,15 @@
 
                                             <label class="btn btn-success" style="margin-left: 10px; width: 100px"
                                                    id="yes_label">
-                                                <input type="radio" name="workState" id="yes" value="1" autocomplete="off" checked
+                                                <input type="radio" name="workState" id="yes" value="1"
+                                                       autocomplete="off" checked
                                                        onclick=" document.getElementById('no_label').classList.remove('btn-success');document.getElementById('no_label').classList.add('btn-danger');document.getElementById('yes_label').classList.remove('btn-danger');
             document.getElementById('yes_label').classList.add('btn-success');"> نعم
                                             </label>
 
                                             <label class="btn btn-danger" style="width: 100px" id="no_label">
-                                                <input type="radio" name="workState" id="no" value="0" autocomplete="off"
+                                                <input type="radio" name="workState" id="no" value="0"
+                                                       autocomplete="off"
                                                        onclick=" document.getElementById('yes_label').classList.remove('btn-success');document.getElementById('yes_label').classList.add('btn-danger');document.getElementById('no_label').classList.remove('btn-danger');
             document.getElementById('no_label').classList.add('btn-success');"> لا
                                             </label>
@@ -140,7 +143,7 @@
                                     <div class="form-group">
                                         <label for="state" lang="ar"><strong>الحالة الإجتماعية</strong></label>
                                         <select class="form-control" name="state"
-                                               id="state">
+                                                id="state">
 
                                             <option value="single">أعزب/عزباء</option>
                                             <option value="married">متزوج/متزوجة</option>
@@ -237,41 +240,42 @@
                             <hr/>
 
 
-
                             <div class="row" style="margin-top: 15px">
 
                                 <div class="col">
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <div class="col">
-
-
-                                        <h5 lang="ar">هل تملك العائلة تأمين صحي</h5><br/>
-
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div class="col">
 
 
-                                            <label class="btn btn-success" style="margin-left: 10px; width: 100px"
-                                                   id="yes_label1">
-                                                <input type="radio" name="assuranceState" id="yes1"  value="1"autocomplete="off" checked
-                                                       onclick=" document.getElementById('no_label1').classList.remove('btn-success');document.getElementById('no_label1').classList.add('btn-danger');document.getElementById('yes_label1').classList.remove('btn-danger');
+                                            <h5 lang="ar">هل تملك العائلة تأمين صحي</h5><br/>
+
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+
+                                                <label class="btn btn-success" style="margin-left: 10px; width: 100px"
+                                                       id="yes_label1">
+                                                    <input type="radio" name="assuranceState" id="yes1" value="1"
+                                                           autocomplete="off" checked
+                                                           onclick=" document.getElementById('no_label1').classList.remove('btn-success');document.getElementById('no_label1').classList.add('btn-danger');document.getElementById('yes_label1').classList.remove('btn-danger');
             document.getElementById('yes_label1').classList.add('btn-success');"> تمتلك
-                                            </label>
+                                                </label>
 
-                                            <label class="btn btn-danger" style="width: 100px" id="no_label1">
-                                                <input type="radio" name="assuranceState" id="no1" value="0" autocomplete="off"
-                                                       onclick=" document.getElementById('yes_label1').classList.remove('btn-success');document.getElementById('yes_label1').classList.add('btn-danger');document.getElementById('no_label1').classList.remove('btn-danger');
-            document.getElementById('no_label1').classList.add('btn-success');">  لا تمتلك
-                                            </label>
+                                                <label class="btn btn-danger" style="width: 100px" id="no_label1">
+                                                    <input type="radio" name="assuranceState" id="no1" value="0"
+                                                           autocomplete="off"
+                                                           onclick=" document.getElementById('yes_label1').classList.remove('btn-success');document.getElementById('yes_label1').classList.add('btn-danger');document.getElementById('no_label1').classList.remove('btn-danger');
+            document.getElementById('no_label1').classList.add('btn-success');"> لا تمتلك
+                                                </label>
+
+
+                                            </div>
 
 
                                         </div>
 
 
                                     </div>
-
-
-                                </div>
 
                                 </div>
 
@@ -280,8 +284,16 @@
 
                                     <div class="form-group">
                                         <label for="assuranceType" lang="ar"><strong>نوع التأمين</strong></label>
-                                        <input class="form-control" placeholder="e.g. private" name="assuranceType"
-                                               type="text" id="assuranceType">
+                                        <select class="form-control" name="assuranceType"
+                                                id="assuranceType">
+                                            <option value="header" disabled selected>أختر نوع التأمين</option>
+                                            <option value="حكومي">حكومي</option>
+                                            <option value="خاص">خاص</option>
+                                            <option value="وكالة">وكالة</option>
+                                            <option value="شؤون">شؤون</option>
+                                            <option value="أسرى">أسرى</option>
+                                            <option value="أخرى">أخرى</option>
+                                        </select>
                                     </div>
 
 
@@ -291,10 +303,7 @@
                             </div>
 
 
-
-
-
-                            <div class="row"  style="margin-top: 15px">
+                            <div class="row" style="margin-top: 15px">
 
                                 <div class="col">
                                     <div class="form-group">
@@ -309,13 +318,15 @@
 
                                                 <label class="btn btn-success" style="margin-left: 10px; width: 100px"
                                                        id="yes_label2">
-                                                    <input type="radio" name="isThereUniStudent" id="yes2" value="1" autocomplete="off" checked
+                                                    <input type="radio" name="isThereUniStudent" id="yes2" value="1"
+                                                           autocomplete="off" checked
                                                            onclick=" document.getElementById('no_label2').classList.remove('btn-success');document.getElementById('no_label2').classList.add('btn-danger');document.getElementById('yes_label2').classList.remove('btn-danger');
             document.getElementById('yes_label2').classList.add('btn-success');"> يوجد
                                                 </label>
 
                                                 <label class="btn btn-danger" style="width: 100px" id="no_label2">
-                                                    <input type="radio" name="isThereUniStudent" id="no2" value="0" autocomplete="off"
+                                                    <input type="radio" name="isThereUniStudent" id="no2" value="0"
+                                                           autocomplete="off"
                                                            onclick=" document.getElementById('yes_label2').classList.remove('btn-success');document.getElementById('yes_label2').classList.add('btn-danger');document.getElementById('no_label2').classList.remove('btn-danger');
             document.getElementById('no_label2').classList.add('btn-success');"> لا يوجد
                                                 </label>
@@ -336,7 +347,8 @@
 
                                     <div class="form-group">
                                         <label for="studentDetails" lang="ar"><strong>معلومات الطالب</strong></label>
-                                        <input class="form-control" placeholder="e.g. ID, University" name="studentDetails"
+                                        <input class="form-control" placeholder="e.g. ID, University"
+                                               name="studentDetails"
                                                type="text" id="studentDetails">
                                     </div>
 
@@ -347,10 +359,7 @@
                             </div>
 
 
-
-
-
-                            <div class="row"  style="margin-top: 15px">
+                            <div class="row" style="margin-top: 15px">
 
                                 <div class="col">
                                     <div class="form-group">
@@ -365,13 +374,15 @@
 
                                                 <label class="btn btn-success" style="margin-left: 10px; width: 100px"
                                                        id="yes_label3">
-                                                    <input type="radio" name="isThereSickPeople_Drugs" id="yes3" value="1" autocomplete="off" checked
+                                                    <input type="radio" name="isThereSickPeople_Drugs" id="yes3"
+                                                           value="1" autocomplete="off" checked
                                                            onclick=" document.getElementById('no_label3').classList.remove('btn-success');document.getElementById('no_label3').classList.add('btn-danger');document.getElementById('yes_label3').classList.remove('btn-danger');
             document.getElementById('yes_label3').classList.add('btn-success');"> نعم
                                                 </label>
 
                                                 <label class="btn btn-danger" style="width: 100px" id="no_label3">
-                                                    <input type="radio" name="isThereSickPeople_Drugs" id="no3" value="0" autocomplete="off"
+                                                    <input type="radio" name="isThereSickPeople_Drugs" id="no3"
+                                                           value="0" autocomplete="off"
                                                            onclick=" document.getElementById('yes_label3').classList.remove('btn-success');document.getElementById('yes_label3').classList.add('btn-danger');document.getElementById('no_label3').classList.remove('btn-danger');
             document.getElementById('no_label3').classList.add('btn-success');"> لا
                                                 </label>
@@ -391,8 +402,10 @@
 
 
                                     <div class="form-group">
-                                        <label for="sicknessDetails" lang="ar"><strong>نوع المرض أو الدواء</strong></label>
-                                        <input class="form-control" placeholder="e.g. ID, University" name="sicknessDetails"
+                                        <label for="sicknessDetails" lang="ar"><strong>نوع المرض أو
+                                                الدواء</strong></label>
+                                        <input class="form-control" placeholder="e.g. ID, University"
+                                               name="sicknessDetails"
                                                type="text" id="sicknessDetails">
                                     </div>
 
@@ -401,10 +414,6 @@
 
 
                             </div>
-
-
-
-
 
 
                             <div class="row">
@@ -427,47 +436,44 @@
     </div>
 
 
-    <script type="text/javascript" >
+    <script type="text/javascript">
 
 
-        document.getElementById('no1').addEventListener("click" , function () {
+        document.getElementById('no1').addEventListener("click", function () {
 
-            document.getElementById('assuranceType').disabled=true;
-
-        });
-
-        document.getElementById('yes1').addEventListener("click" , function () {
-
-            document.getElementById('assuranceType').disabled=false;
+            document.getElementById('assuranceType').disabled = true;
 
         });
 
-        document.getElementById('no2').addEventListener("click" , function () {
+        document.getElementById('yes1').addEventListener("click", function () {
 
-            document.getElementById('studentDetails').disabled=true;
-
-        });
-
-        document.getElementById('yes2').addEventListener("click" , function () {
-
-            document.getElementById('studentDetails').disabled=false;
+            document.getElementById('assuranceType').disabled = false;
 
         });
 
-        document.getElementById('yes3').addEventListener("click" , function () {
+        document.getElementById('no2').addEventListener("click", function () {
 
-            document.getElementById('sicknessDetails').disabled=false;
-
-        });
-
-        document.getElementById('no3').addEventListener("click" , function () {
-
-            document.getElementById('sicknessDetails').disabled=true;
+            document.getElementById('studentDetails').disabled = true;
 
         });
 
+        document.getElementById('yes2').addEventListener("click", function () {
 
+            document.getElementById('studentDetails').disabled = false;
 
+        });
+
+        document.getElementById('yes3').addEventListener("click", function () {
+
+            document.getElementById('sicknessDetails').disabled = false;
+
+        });
+
+        document.getElementById('no3').addEventListener("click", function () {
+
+            document.getElementById('sicknessDetails').disabled = true;
+
+        });
 
 
     </script>

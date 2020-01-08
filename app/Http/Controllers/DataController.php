@@ -22,7 +22,7 @@ class DataController extends Controller
     public function index()
     {
         //
-        $families = Family::query()->orderBy('name', 'asc')->paginate(10);
+        $families = Family::query()->orderBy('id', 'desc')->paginate(10);
 
         return view('Family.view')->with('families', $families);
 

@@ -283,12 +283,14 @@
                                                 <label style="margin-left: 10px; width: 100px;font-size: large"
                                                        id="yes_label1">
                                                     <input type="radio" name="assuranceState" id="yes1" value="1"
-                                                           autocomplete="off" checked> تمتلك
+                                                           autocomplete="off" {{$family->assuranceType != "لا يوجد" ? "checked" : "" }}>
+                                                    تمتلك
                                                 </label>
 
                                                 <label style="width: 100px;font-size: large" id="no_label1">
                                                     <input type="radio" name="assuranceState" id="no1" value="0"
-                                                           autocomplete="off"> لا تمتلك
+                                                           autocomplete="off" {{$family->assuranceType == "لا يوجد" ? "checked" : "" }}>
+                                                    لا تمتلك
                                                 </label>
 
 
@@ -307,8 +309,31 @@
 
                                     <div class="form-group">
                                         <label for="assuranceType" lang="ar"><strong>نوع التأمين</strong></label>
-                                        <input class="form-control" placeholder="e.g. private" name="assuranceType"
-                                               type="text" id="assuranceType" value="{{$family->assuranceType}}">
+                                        <select class="form-control" name="assuranceType"
+                                                id="assuranceType">
+                                            <option value="header"
+                                                    disabled {{$family->assuranceType == "لا يوجد" ? "selected" : "" }}>
+                                                أختر نوع التأمين
+                                            </option>
+                                            <option value="حكومي" {{$family->assuranceType == "حكومي" ? "selected" : "" }}>
+                                                حكومي
+                                            </option>
+                                            <option value="خاص" {{$family->assuranceType == "خاص" ? "selected" : "" }}>
+                                                خاص
+                                            </option>
+                                            <option value="وكالة" {{$family->assuranceType == "وكالة" ? "selected" : "" }}>
+                                                وكالة
+                                            </option>
+                                            <option value="شؤون" {{$family->assuranceType == "شؤون" ? "selected" : "" }}>
+                                                شؤون
+                                            </option>
+                                            <option value="أسرى" {{$family->assuranceType == "أسرى" ? "selected" : "" }}>
+                                                أسرى
+                                            </option>
+                                            <option value="أخرى" {{$family->assuranceType == "أخرى" ? "selected" : "" }}>
+                                                أخرى
+                                            </option>
+                                        </select>
                                     </div>
 
 
@@ -448,7 +473,7 @@
 
         document.getElementById('no1').addEventListener("click", function () {
 
-            document.getElementById('assuranceType').value = "";
+            document.getElementById('assuranceType').selectedIndex = 0;
             document.getElementById('assuranceType').disabled = true;
 
 
