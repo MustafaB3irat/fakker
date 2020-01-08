@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Visit;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\QueryBuilder\QueryBuilder;
 
 
 class DataController extends Controller
@@ -22,9 +23,14 @@ class DataController extends Controller
     public function index()
     {
         //
-        $families = Family::query()->orderBy('id', 'desc')->paginate(10);
+        // $families = Family::query()->orderBy('id', 'desc')->paginate(10);
 
-        return view('Family.view')->with('families', $families);
+        $result = QueryBuilder::for(Family::class)
+            ->allowedFilters(['name', 'phone', 'hawya', 'area'])
+            ->orderBy('id', 'desc')
+            ->paginate(10);
+
+        return view('Family.view')->with('families', $result);
 
     }
 

@@ -383,8 +383,7 @@
                                                 <label class="btn btn-danger" style="width: 100px" id="no_label3">
                                                     <input type="radio" name="isThereSickPeople_Drugs" id="no3"
                                                            value="0" autocomplete="off"
-                                                           onclick=" document.getElementById('yes_label3').classList.remove('btn-success');document.getElementById('yes_label3').classList.add('btn-danger');document.getElementById('no_label3').classList.remove('btn-danger');
-            document.getElementById('no_label3').classList.add('btn-success');"> لا
+                                                           onclick=""> لا
                                                 </label>
 
 
@@ -455,6 +454,7 @@
 
             document.getElementById('studentDetails').disabled = true;
 
+
         });
 
         document.getElementById('yes2').addEventListener("click", function () {
@@ -472,6 +472,10 @@
         document.getElementById('no3').addEventListener("click", function () {
 
             document.getElementById('sicknessDetails').disabled = true;
+            document.getElementById('yes_label3').classList.remove('btn-success');
+            document.getElementById('yes_label3').classList.add('btn-danger');
+            document.getElementById('no_label3').classList.remove('btn-danger');
+            document.getElementById('no_label3').classList.add('btn-success');
 
         });
 

@@ -8,6 +8,8 @@
 
 @section('content')
 
+    <div id="error" class="alert alert-danger" lang="ar" dir="rtl" style="visibility: hidden;text-align: right;margin-top: 20px;font-size: 18px"></div>
+
     <a href="{{route('import')}}" class="btn btn-primary" id="import">Import Data</a>
 
     @if(count($families)>0)
@@ -20,6 +22,31 @@
 
 
                 <thead>
+
+                <tr>
+
+
+                    <th colspan="2">
+                        <select name="filter" id="filter" style="width: 100%;font-size: 20px">
+                            <option value="header" disabled selected>طريقة البحث</option>
+                            <option value="name">بحث عن اسم</option>
+                            <option value="phone">بحث عن رقم جوال</option>
+                            <option value="area">بحث عن منطقة</option>
+                            <option value="hawya">بحث عن رقم هوية</option>
+                        </select>
+                    </th>
+
+                    <th colspan="2">
+                        <input type="text" id="filter_input"
+                               style="width: 100%;text-align: center;font-size: 16px;font-weight: bold" lang="rtl">
+                    </th>
+
+                    <th colspan="2">
+                        <a href="#" class="btn btn-dark" style="width: 100%" onclick=" return filter(event)">ابحث</a>
+                    </th>
+
+
+                </tr>
 
 
                 <tr>
@@ -129,4 +156,29 @@
     @endif
 
 
+    <script type="text/javascript">
+
+        function filter(event) {
+            event.preventDefault();
+
+            var e = document.getElementById('filter');
+            var filter_input = document.getElementById('filter_input').value;
+            var filter = e.options[e.selectedIndex].value;
+
+            if (filter == "header" || filter_input == "" || filter_input == null) {
+                document.getElementById('error').style.visibility = 'visible';
+                document.getElementById('error').innerText = "الرجاء اختيار طريقة البحث وقيمتها";
+                return false;
+
+            } else {
+                document.getElementById('error').style.visibility = 'hidden';
+                document.getElementById('error').innerText = "";
+                window.location.href = "?filter[" + filter + "]=" + filter_input;
+
+            }
+        }
+
+    </script>
+
 @endsection
+
