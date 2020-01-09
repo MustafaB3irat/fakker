@@ -157,10 +157,10 @@ class DataController extends Controller
             $family->save();
         } catch (\Exception $e) {
 
-            return redirect('/data');
+            return redirect('/data/create')->with('errors', []);
         }
 
-        return redirect('/data/create')->with('errors', []);
+        return redirect('/data')->with('success', "success");
     }
 
     /**
@@ -231,16 +231,19 @@ class DataController extends Controller
 
         $boysAges = "";
 
-        foreach ($boysBirthdates as $i) {
+        if ($boysBirthdates[0] != "---")
+            foreach ($boysBirthdates as $i) {
 
-            if (Carbon::parse($i)->age == 0)
-                $boysAges .= " أقل من سنة";
-            else
-                $boysAges .= Carbon::parse($i)->age;
+                if (Carbon::parse($i)->age == 0)
+                    $boysAges .= " أقل من سنة";
+                else
+                    $boysAges .= Carbon::parse($i)->age;
 
-            $boysAges .= "  ";
+                $boysAges .= "  ";
 
-        }
+            }
+        else
+            $boysAges = "---";
 
         $girlsBirthdates = explode(
             ';', $family->girlsAges
@@ -248,16 +251,21 @@ class DataController extends Controller
 
         $girlsAges = "";
 
-        foreach ($girlsBirthdates as $i) {
+        if ($girlsBirthdates[0] != "---")
 
-            if (Carbon::parse($i)->age == 0)
-                $girlsAges .= " أقل من سنة";
-            else
-                $girlsAges .= Carbon::parse($i)->age;
+            foreach ($girlsBirthdates as $i) {
 
-            $girlsAges .= "  ";
+                if (Carbon::parse($i)->age == 0)
+                    $girlsAges .= " أقل من سنة";
+                else
+                    $girlsAges .= Carbon::parse($i)->age;
 
-        }
+                $girlsAges .= "  ";
+
+            }
+
+        else
+            $girlsAges = "---";
 
 
         $family->girlsAges = $girlsAges;
@@ -304,9 +312,8 @@ class DataController extends Controller
             'motherWork' => 'required',
             'incomeSrc' => 'required',
             'boysNum' => 'required',
-            'boysAges' => 'required',
             'girlsNum' => 'required',
-            'girlsAges' => 'required',
+
         ]);
 
 
@@ -327,7 +334,7 @@ class DataController extends Controller
 
 
         $i = 1;
-        $boysAges = "";
+        $boysAges = "---";
         while ($request->input('b_' . $i) != null) {
 
             $this->validate($request, [
@@ -339,6 +346,7 @@ class DataController extends Controller
             if ($i == 1)
                 $boysAges = "";
 
+
             $boysAges .= $request->input('b_' . $i);
             $i++;
 
@@ -348,7 +356,7 @@ class DataController extends Controller
         }
 
         $i = 1;
-        $girlsAges = "";
+        $girlsAges = "---";
         while ($request->input('g_' . $i) != null) {
 
             $this->validate($request, [
@@ -359,6 +367,7 @@ class DataController extends Controller
 
             if ($i == 1)
                 $girlsAges = "";
+
 
             $girlsAges .= $request->input('g_' . $i);
 

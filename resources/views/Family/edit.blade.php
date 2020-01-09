@@ -20,6 +20,9 @@
 
 @section('content')
 
+
+
+
     <div class="row" style="justify-content: center;margin-top: 30px;">
 
 
@@ -30,7 +33,8 @@
         </div>
 
         <div class="col">
-            <h2 lang="ar">   {{ $family->name }}تعديل معلومات عائلة </h2>
+            <h2>تعديل معلومات عائلة</h2>
+            <h2 lang="ar">{{ $family->name }} </h2>
         </div>
 
 
@@ -235,11 +239,12 @@
                                 <div class="col">
 
                                     <div class="form-group">
-                                        <label for="boysAges" lang="ar"><strong>أعمارهم</strong></label>
-                                        <input class="form-control" placeholder="e.g. 10,20,30" name="boysAges"
-                                               type="text" id="boysAges" value="{{$family->boysAges}}" required>
-                                    </div>
+                                        <label for="boysAges" id="boys_label" lang="ar"><strong>تواريخ الميلاد</strong></label>
+                                        <div id="boysAges">
 
+
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -259,9 +264,13 @@
 
 
                                     <div class="form-group">
-                                        <label for="girlsAges" lang="ar"><strong>أعمارهن</strong></label>
-                                        <input class="form-control" placeholder="e.g. 10,15,13" name="girlsAges"
-                                               type="text" id="girlsAges" value="{{$family->girlsAges}}" required>
+                                        <label for="girlsAges" id="girls_label" lang="ar"><strong>تواريخ
+                                                الميلاد</strong></label>
+
+                                        <div id="girlsAges">
+
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -474,6 +483,66 @@
     <script type="text/javascript">
 
 
+        document.getElementById('boysNum').addEventListener("keyup", function () {
+
+            var num = document.getElementById('boysNum').value;
+
+            var div = document.getElementById('boysAges');
+            var x;
+
+            div.innerHTML = "";
+
+            if (num == 0)
+                document.getElementById('boys_label').innerText = "";
+            else
+                document.getElementById('boys_label').innerHTML = "<strong>تواريخ الميلاد</strong>";
+
+            for (var i = 0; i < num; i++) {
+
+                x = document.createElement("INPUT");
+                x.setAttribute("type", "date");
+                x.classList.add("form-control");
+                x.style.marginTop = "5px";
+                x.required = true;
+                x.setAttribute("name", "b_" + (i + 1));
+
+                div.appendChild(x);
+
+
+            }
+
+        });
+
+        document.getElementById('girlsNum').addEventListener("keyup", function () {
+
+            var num = document.getElementById('girlsNum').value;
+
+            var div = document.getElementById('girlsAges');
+            var x;
+
+            div.innerHTML = "";
+
+            if (num == 0)
+                document.getElementById('girls_label').innerText = "";
+            else
+                document.getElementById('girls_label').innerHTML = "<strong>تواريخ الميلاد</strong>";
+
+            for (var i = 0; i < num; i++) {
+
+                x = document.createElement("INPUT");
+                x.setAttribute("type", "date");
+                x.classList.add("form-control");
+                x.style.marginTop = "5px";
+                x.required = true;
+                x.setAttribute("name", "g_" + (i + 1));
+
+                div.appendChild(x);
+
+
+            }
+        });
+
+
         document.getElementById('no1').addEventListener("click", function () {
 
             document.getElementById('assuranceType').selectedIndex = 0;
@@ -513,6 +582,53 @@
             document.getElementById('sicknessDetails').disabled = true;
 
         });
+
+
+        var boysAgesDiv = document.getElementById('boysAges');
+        var girlsAgesDiv = document.getElementById('girlsAges');
+
+
+        var boysNum = '{{$family->boysNum}}';
+        var girlsNum = '{{$family->girlsNum}}';
+
+
+        var boysAges = "{{$family->boysAges}}";
+        var girlsAges = "{{$family->girlsAges}}";
+
+
+        var bAges = boysAges.split(";");
+
+        var gAges = girlsAges.split(";");
+
+        var x;
+
+        for (var i = 1; i <= boysNum; i++) {
+
+            x = document.createElement("INPUT");
+            x.setAttribute("type", "date");
+            x.setAttribute("name", ("b_" + i));
+            x.classList.add("form-control");
+            x.style.marginTop="5px";
+
+            x.value = bAges[i - 1];
+
+            boysAgesDiv.appendChild(x);
+
+        }
+
+        for (var i = 1; i <= girlsNum; i++) {
+
+            x = document.createElement("INPUT");
+            x.setAttribute("type", "date");
+            x.setAttribute("name", ("g_" + i));
+            x.classList.add("form-control");
+            x.style.marginTop="5px";
+
+            x.value = gAges[i - 1];
+
+            boysAgesDiv.appendChild(x);
+
+        }
 
     </script>
 
