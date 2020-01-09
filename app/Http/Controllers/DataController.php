@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Visit;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\QueryBuilder\QueryBuilder;
+use Carbon\Carbon;
 
 
 class DataController extends Controller
@@ -63,10 +64,54 @@ class DataController extends Controller
             'motherWork' => 'required',
             'incomeSrc' => 'required',
             'boysNum' => 'required',
-            'boysAges' => 'required',
             'girlsNum' => 'required',
-            'girlsAges' => 'required',
         ]);
+
+
+        $i = 1;
+        $boysAges = "---";
+        while ($request->input('b_' . $i) != null) {
+
+            $this->validate($request, [
+
+                'b_' . $i => 'required | date | before:today',
+
+            ]);
+
+            if ($i == 1)
+                $boysAges = "";
+
+
+            $boysAges .= $request->input('b_' . $i);
+            $i++;
+
+            if ($request->input('b_' . $i) != null)
+                $boysAges .= ";";
+
+        }
+
+        $i = 1;
+        $girlsAges = "---";
+        while ($request->input('g_' . $i) != null) {
+
+            $this->validate($request, [
+
+                'g_' . $i => 'required | date | before:today',
+
+            ]);
+
+            if ($i == 1)
+                $girlsAges = "";
+
+
+            $girlsAges .= $request->input('g_' . $i);
+
+            $i++;
+
+            if ($request->input('g_' . $i) != null)
+                $girlsAges .= ";";
+
+        }
 
 
         $family = new Family;
@@ -82,9 +127,9 @@ class DataController extends Controller
         $family->workState = $request->input('workState');
         $family->incomeSrc = $request->input('incomeSrc');
         $family->boysNum = $request->input('boysNum');
-        $family->boysAges = $request->input('boysAges');
+        $family->boysAges = $boysAges;
         $family->girlsNum = $request->input('girlsNum');
-        $family->girlsAges = $request->input('girlsAges');
+        $family->girlsAges = $girlsAges;
 
         if ($request->input('assuranceType') == "")
             $family->assuranceType = "لا يوجد";
@@ -108,9 +153,14 @@ class DataController extends Controller
             $family->sicknessDetails = $request->input('sicknessDetails');
 
 
-        $family->save();
+        try {
+            $family->save();
+        } catch (\Exception $e) {
 
-        return redirect('/data')->with('success', 'Added Successfully!');
+            return redirect('/data');
+        }
+
+        return redirect('/data/create')->with('errors', []);
     }
 
     /**
@@ -175,6 +225,45 @@ class DataController extends Controller
         }
 
 
+        $boysBirthdates = explode(
+            ';', $family->boysAges
+        );
+
+        $boysAges = "";
+
+        foreach ($boysBirthdates as $i) {
+
+            if (Carbon::parse($i)->age == 0)
+                $boysAges .= " أقل من سنة";
+            else
+                $boysAges .= Carbon::parse($i)->age;
+
+            $boysAges .= "  ";
+
+        }
+
+        $girlsBirthdates = explode(
+            ';', $family->girlsAges
+        );
+
+        $girlsAges = "";
+
+        foreach ($girlsBirthdates as $i) {
+
+            if (Carbon::parse($i)->age == 0)
+                $girlsAges .= " أقل من سنة";
+            else
+                $girlsAges .= Carbon::parse($i)->age;
+
+            $girlsAges .= "  ";
+
+        }
+
+
+        $family->girlsAges = $girlsAges;
+        $family->boysAges = $boysAges;
+
+
         return view('Family.show')->with('Family', $family);
     }
 
@@ -237,6 +326,50 @@ class DataController extends Controller
             $sicknessDetails = $request->input('sicknessDetails');
 
 
+        $i = 1;
+        $boysAges = "";
+        while ($request->input('b_' . $i) != null) {
+
+            $this->validate($request, [
+
+                'b_' . $i => 'required | date | before:today',
+
+            ]);
+
+            if ($i == 1)
+                $boysAges = "";
+
+            $boysAges .= $request->input('b_' . $i);
+            $i++;
+
+            if ($request->input('b_' . $i) != null)
+                $boysAges .= ";";
+
+        }
+
+        $i = 1;
+        $girlsAges = "";
+        while ($request->input('g_' . $i) != null) {
+
+            $this->validate($request, [
+
+                'g_' . $i => 'required | date | before:today',
+
+            ]);
+
+            if ($i == 1)
+                $girlsAges = "";
+
+            $girlsAges .= $request->input('g_' . $i);
+
+            $i++;
+
+            if ($request->input('g_' . $i) != null)
+                $girlsAges .= ";";
+
+        }
+
+
         Family::query()->where('id', $id)->update([
 
             'name' => $request->input('name'),
@@ -256,8 +389,8 @@ class DataController extends Controller
             'incomeSrc' => $request->input('incomeSrc'),
             'boysNum' => $request->input('boysNum'),
             'girlsNum' => $request->input('girlsNum'),
-            'boysAges' => $request->input('boysAges'),
-            'girlsAges' => $request->input('girlsAges'),
+            'boysAges' => $boysAges,
+            'girlsAges' => $girlsAges,
 
         ]);
 
