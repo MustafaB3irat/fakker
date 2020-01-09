@@ -37,7 +37,7 @@
                                     <div class="form-group">
                                         <label for="name" lang="ar"><strong>الإسم الكامل</strong></label>
                                         <input class="form-control" placeholder="e.g.Jone Doe" name="name" type="text"
-                                               id="name">
+                                               id="name" required>
                                     </div>
                                 </div>
 
@@ -46,7 +46,7 @@
                                     <div class="form-group">
                                         <label for="phone" lang="ar"><strong>رقم للتواصل</strong></label>
                                         <input class="form-control" placeholder="e.g.05********" name="phone"
-                                               type="number" id="phone">
+                                               type="number" id="phone" required>
                                     </div>
 
                                 </div>
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label for="area" lang="ar"><strong>المنطقة</strong></label>
                                         <input class="form-control" placeholder="e.g.Ramallah" name="area" type="text"
-                                               id="area">
+                                               id="area" required>
                                     </div>
 
                                 </div>
@@ -72,7 +72,7 @@
                                     <div class="form-group">
                                         <label for="address" lang="ar"><strong>العنوان بالتفصيل</strong></label>
                                         <input class="form-control" placeholder="e.g.st.330 ramallah main.St"
-                                               name="address" type="text" id="address">
+                                               name="address" type="text" id="address" required>
                                     </div>
 
 
@@ -92,7 +92,7 @@
 
                                         <h5 lang="ar">هل يعمل أحد في العائلة</h5><br/>
 
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <div class="btn-group btn-group-toggle">
 
 
                                             <label class="btn btn-success" style="margin-left: 10px; width: 100px"
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <label for="haywa" lang="ar"><strong>رقم الهوية</strong></label>
                                         <input class="form-control" placeholder="e.g.40*******" name="hawya"
-                                               type="number" id="haywa">
+                                               type="number" id="haywa" required>
                                     </div>
 
                                 </div>
@@ -143,7 +143,7 @@
                                     <div class="form-group">
                                         <label for="state" lang="ar"><strong>الحالة الإجتماعية</strong></label>
                                         <select class="form-control" name="state"
-                                                id="state">
+                                                id="state" required>
 
                                             <option value="single">أعزب/عزباء</option>
                                             <option value="married">متزوج/متزوجة</option>
@@ -164,7 +164,7 @@
                                     <div class="form-group">
                                         <label for="houseHolderWork" lang="ar"><strong>عمل رب الأسرة</strong></label>
                                         <input class="form-control" placeholder="e.g. teacher" name="houseHolderWork"
-                                               type="text" id="houseHolderWork">
+                                               type="text" id="houseHolderWork" required>
                                     </div>
 
                                 </div>
@@ -174,7 +174,7 @@
                                     <div class="form-group">
                                         <label for="houseHolderWork" lang="ar"><strong>عمل الأم</strong></label>
                                         <input class="form-control" placeholder="e.g. house wife" name="motherWork"
-                                               type="text" id="motherWork">
+                                               type="text" id="motherWork" required>
                                     </div>
 
 
@@ -185,7 +185,7 @@
                             <div class="form-group">
                                 <label for="incomeSrc" lang="ar"><strong>مصدر الدخل</strong></label>
                                 <input class="form-control" placeholder="e.g. agencies" name="incomeSrc" type="text"
-                                       id="incomeSrc">
+                                       id="incomeSrc" required>
                             </div>
 
 
@@ -198,7 +198,7 @@
                                     <div class="form-group">
                                         <label for="houseHolderWork" lang="ar"><strong>عدد الأولاد</strong></label>
                                         <input class="form-control" placeholder="e.g. 3" name="boysNum" type="number"
-                                               id="boysNum">
+                                               id="boysNum" required>
                                     </div>
                                 </div>
 
@@ -207,7 +207,7 @@
                                     <div class="form-group">
                                         <label for="boysAges" lang="ar"><strong>أعمارهم</strong></label>
                                         <input class="form-control" placeholder="e.g. 10,20,30" name="boysAges"
-                                               type="text" id="boysAges">
+                                               type="text" id="boysAges" required>
                                     </div>
 
                                 </div>
@@ -221,7 +221,7 @@
                                     <div class="form-group">
                                         <label for="houseHolderWork" lang="ar"><strong>عدد البنات</strong></label>
                                         <input class="form-control" placeholder="e.g. 3" name="girlsNum" type="number"
-                                               id="girlsNum">
+                                               id="girlsNum" required>
                                     </div>
                                 </div>
 
@@ -231,7 +231,7 @@
                                     <div class="form-group">
                                         <label for="girlsAges" lang="ar"><strong>أعمارهن</strong></label>
                                         <input class="form-control" placeholder="e.g. 10,15,13" name="girlsAges"
-                                               type="text" id="girlsAges">
+                                               type="text" id="girlsAges" required>
                                     </div>
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
 
                                             <h5 lang="ar">هل تملك العائلة تأمين صحي</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label class="btn btn-success" style="margin-left: 10px; width: 100px"
@@ -313,7 +313,7 @@
 
                                             <h5 lang="ar">هل يوجد طالب جامعي</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label class="btn btn-success" style="margin-left: 10px; width: 100px"
@@ -369,7 +369,7 @@
 
                                             <h5 lang="ar">هل هناك مريض بحاجة لعلاج أو دواء بشكل مزمن</h5><br/>
 
-                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                            <div class="btn-group btn-group-toggle">
 
 
                                                 <label class="btn btn-success" style="margin-left: 10px; width: 100px"
