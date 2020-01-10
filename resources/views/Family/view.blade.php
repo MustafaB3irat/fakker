@@ -4,13 +4,25 @@
 
     <link rel="stylesheet" href="{{asset('css/Family/view_page_style.css')}}">
 
+    <script type="text/javascript">
+        var deserve;
+    </script>
+
 @endsection
 
 @section('content')
 
-    <div id="error" class="alert alert-danger" lang="ar" dir="rtl" style="visibility: hidden;text-align: right;margin-top: 20px;font-size: 18px"></div>
+    <div id="error" class="alert alert-danger" lang="ar" dir="rtl"
+         style="visibility: hidden;text-align: right;margin-top: 20px;font-size: 18px"></div>
 
-    <a href="{{route('import')}}" class="btn btn-primary" id="import">Import Data</a>
+
+    <div id="import">
+
+        <a href="{{route('visualize')}}" class="btn btn-primary">Visualize Data</a>
+        <a href="{{route('import')}}" class="btn btn-primary" style="margin-right: 5px">Import Data</a>
+
+    </div>
+
 
     @if(count($families)>0)
 
@@ -120,16 +132,32 @@
 
 
                         <td>
-                            <a class="btn btn-success btn" href="visit/{{$family->id}}" style="width:100%">زيارة</a>
+                            <a class="btn btn-success btn" href="visit/{{$family->id}}/{{$family->deserve}}"
+                               style="width:100%">زيارة</a>
                         </td>
 
 
                         <td>
-                            <h3>يستحق</h3>
+                            <h3 id="deserve-{{$family->id}}"></h3>
                         </td>
 
 
                     </tr>
+
+                    <script type="text/javascript">
+
+                        deserve = "{{$family->deserve}}";
+
+                        if (deserve == "1") {
+                            document.getElementById('deserve-' + "{{$family->id}}").innerText = "يستحق";
+                            document.getElementById('deserve-' + "{{$family->id}}").style.color = "green";
+                        } else if (deserve == "0") {
+
+                            document.getElementById('deserve-' + "{{$family->id}}").innerText = " لا يستحق";
+                            document.getElementById('deserve-' + "{{$family->id}}").style.color = "red";
+                        }
+
+                    </script>
 
                 @endforeach
 
@@ -177,6 +205,7 @@
 
             }
         }
+
 
     </script>
 

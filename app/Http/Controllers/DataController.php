@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\reports;
 use App\Family;
 use App\Imports\FamilyImport;
-use App\Imports\VisitsImport;
 use Illuminate\Http\Request;
 
 
 use App\Visit;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\QueryBuilder\QueryBuilder;
 use Carbon\Carbon;
@@ -267,6 +268,12 @@ class DataController extends Controller
         else
             $girlsAges = "---";
 
+        if ($family->boysNum == 0)
+            $boysAges = "---";
+
+        if ($family->girlsNum == 0)
+            $girlsAges = "---";
+
 
         $family->girlsAges = $girlsAges;
         $family->boysAges = $boysAges;
@@ -521,6 +528,70 @@ class DataController extends Controller
             return redirect('data')->with("errors", $errors);
 
         return redirect('data')->with("success", "Success");
+
+    }
+
+
+    public function showVisualize()
+    {
+
+        return view('Family.FamilyVisualization')->with('chart', null);
+    }
+
+
+    public function visualize(Request $request)
+    {
+
+        $this->validate($request, [
+
+            'chartType' => 'required',
+            'dataType' => 'required'
+        ]);
+
+
+        $dataType = $request->input('dataType');
+        $chartType = $request->input('chartType');
+
+        $data = DB::table('families')
+            ->select(DB::raw('count(*) as num , ' . $dataType))
+            ->groupBy($dataType)
+            ->get()
+            ->pluck('num', $dataType);
+
+        $chart = new reports;
+
+
+        $datasetName = "المنطقة";
+
+        if ($dataType == "state")
+            $datasetName = "الحالة الإجتماعية";
+
+
+        $chart->labels($data->keys());
+        $chart->dataset(" تصنيف حسب " . $datasetName, $chartType, $data->values());
+
+        return view('Family.FamilyVisualization')->with('chart', $chart);
+    }
+
+
+    public function deserve(Request $request)
+    {
+
+        $this->validate($request, [
+            'id' => "required",
+        ]);
+
+        $deserve = "0";
+
+        if ($request->input('deserve') == "1")
+            $deserve = $request->input('deserve');
+
+        Family::query()->where('id', $request->input('id'))->update([
+            'deserve' => $deserve
+        ]);
+
+
+        return redirect('visit/' . $request->input('id') . '/' . $deserve)->with("success", "success");
 
     }
 }

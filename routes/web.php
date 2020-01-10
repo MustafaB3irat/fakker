@@ -18,7 +18,7 @@ Route::get('/login', 'MainController@login');
 
 Route::resource('data', 'DataController')->middleware('auth');
 
-Route::get('visit/{id}', 'VisitController@index')->middleware('auth');
+Route::get('visit/{id}/{deserve}', 'VisitController@index')->middleware('auth');
 Route::get('visit/create/{id}', 'VisitController@create')->middleware('auth');
 
 Route::post('visit', 'VisitController@store')->middleware('auth');
@@ -32,3 +32,14 @@ Route::post('import', 'DataController@importExcel')->name('importExcel')->middle
 Route::get('visit/edit/{id}', 'VisitController@edit')->name('edit')->middleware('auth');
 
 Route::post('visit/edit', 'VisitController@update')->name('visitEdit')->middleware('auth');
+
+
+Route::get('family/visualize', 'DataController@visualize')->name('FamilyVisualize')->middleware('auth');
+Route::get('visualize', 'DataController@showVisualize')->name('visualize')->middleware('auth');
+
+
+Route::post('deservestate', 'DataController@deserve')->name('deserveState')->middleware('auth');
+
+
+
+

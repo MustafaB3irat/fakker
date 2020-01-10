@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Family;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Visit;
 
@@ -10,12 +12,13 @@ class VisitController extends Controller
     //
 
 
-    public function index($id)
+    public function index($id, $deserve)
     {
+
 
         $visits = Visit::query()->orderBy('date', 'desc')->where('family_id', $id)->paginate(8);
 
-        return view('Visits.show')->with('Visits', $visits)->with('FamilyID', $id);
+        return view('Visits.show')->with('Visits', $visits)->with('FamilyID', $id)->with('deserve', $deserve);
 
     }
 
@@ -29,7 +32,7 @@ class VisitController extends Controller
             'notes' => 'required'
         ]);
 
-        Visit::query()->where("id" , $request->input("id"))->update([
+        Visit::query()->where("id", $request->input("id"))->update([
 
                 'date' => $request->input("date"),
                 'notes' => $request->input("notes"),
@@ -38,7 +41,7 @@ class VisitController extends Controller
             ]
         );
 
-        return redirect('visit/' . $request->input('family_id'))->with("success" , "success");
+        return redirect('visit/' . $request->input('family_id'))->with("success", "success");
 
     }
 

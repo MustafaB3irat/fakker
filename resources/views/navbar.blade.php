@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{url('/')}}"> <img class="logo rounded-circle" src="{{asset('img/favicon.jpg')}}"
-                                                      height="40"> {{config('app.name' , 'فكر بغيرك')}}</a>
+    <a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('img/logoText.png')}}"
+                                                                       alt="logoText" width="130" height="50"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

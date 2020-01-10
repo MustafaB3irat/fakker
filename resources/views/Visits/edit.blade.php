@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="date" lang="ar"><strong>تاريخ الزيارة</strong></label>
                                     <input class="form-control" name="date" type="date"
-                                           id="date" value="{{$visit->date}}">
+                                           id="date" value="{{$visit->date}}" required>
 
 
                                 </div>
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <label for="needs" lang="ar"><strong>احتياجات العائلة</strong></label>
                                     <textarea class="form-control" name="needs"
-                                              id="needs">{{$visit->needs}}</textarea>
+                                              id="needs" required>{{$visit->needs}}</textarea>
                                 </div>
 
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="form-group">
                                     <label for="notes" lang="ar"><strong>ملاحظات</strong></label>
                                     <textarea class="form-control" name="notes"
-                                              id="notes">{{$visit->notes}}</textarea>
+                                              id="notes" required>{{$visit->notes}}</textarea>
                                 </div>
 
                             </div>

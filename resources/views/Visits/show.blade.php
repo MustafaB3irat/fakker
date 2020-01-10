@@ -16,7 +16,7 @@
 
         <div class="col" style="float: left">
 
-            <a href="{{url('/data')}}" class="btn btn-primary">Back</a>
+            <a href="{{url('/data')}}" class="btn btn-primary btn-lg">Back</a>
 
         </div>
 
@@ -29,7 +29,30 @@
         </div>
 
 
+        <div class="col">
+
+
+            <form action="{{action('DataController@deserve')}}" method="post" id="deserve">
+
+                {{csrf_field()}}
+
+                <div class="custom-control custom-switch" style="float: right;width: 100%">
+                    <input type="checkbox" class="custom-control-input" id="customSwitches" name="deserve" value="1">
+                    <label class="custom-control-label" for="customSwitches" lang="ar"
+                           style="font-size: 25px">يستحق</label>
+                </div>
+
+
+                <input type="hidden" value="{{$FamilyID}}" name="id">
+            </form>
+
+
+        </div>
+
+
     </div>
+
+    <hr>
 
 
     <!--   Modal -->
@@ -59,7 +82,7 @@
                                     <div class="form-group">
                                         <label for="date" lang="ar"><strong>تاريخ الزيارة</strong></label>
                                         <input class="form-control" name="date" type="date"
-                                               id="date">
+                                               id="date" required>
                                     </div>
                                 </div>
 
@@ -77,7 +100,7 @@
                                     <div class="form-group">
                                         <label for="needs" lang="ar"><strong>احتياجات العائلة</strong></label>
                                         <textarea class="form-control" name="needs"
-                                                  id="needs"></textarea>
+                                                  id="needs" required></textarea>
                                     </div>
 
                                 </div>
@@ -92,7 +115,7 @@
                                     <div class="form-group">
                                         <label for="notes" lang="ar"><strong>ملاحظات</strong></label>
                                         <textarea class="form-control" name="notes"
-                                                  id="notes"></textarea>
+                                                  id="notes" required></textarea>
                                     </div>
 
                                 </div>
@@ -153,7 +176,17 @@
 
                                 <hr>
 
-                                <a href="edit/{{$visit->id}}" class="fas fa-edit" style="margin: 0 auto" lang="ar">تعديل</a>
+                                <small>Added</small>
+
+                                <small>{{\Carbon\Carbon::parse($visit->created_at)->diffForHumans()}}</small>
+                                <br>
+                                <small>Updated</small>
+
+                                <small>{{\Carbon\Carbon::parse($visit->updated_at)->diffForHumans()}}</small>
+                                <hr>
+
+                                <a href="edit/{{$visit->id}}" class="fas fa-edit" style="margin: 0 auto"
+                                   lang="ar">تعديل</a>
 
                             </div>
 
@@ -185,6 +218,24 @@
         </div>
 
     @endif
+
+
+    <script type="text/javascript">
+        document.getElementById('customSwitches').addEventListener("click", function () {
+
+            document.getElementById('deserve').submit();
+
+        });
+
+        var deserve = "{{$deserve}}";
+
+
+        if (deserve == "0") {
+            document.getElementById('customSwitches').checked = false;
+        } else if (deserve == "1") {
+            document.getElementById('customSwitches').checked = true;
+        }
+    </script>
 
 
 
