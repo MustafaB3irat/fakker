@@ -29,9 +29,9 @@ Route::get('import', 'DataController@import')->name('import')->middleware('auth'
 
 Route::post('import', 'DataController@importExcel')->name('importExcel')->middleware('auth');
 
-Route::get('visit/edit/{id}', 'VisitController@edit')->name('edit')->middleware('auth');
+Route::get('visitedit/{id}/{deserve}', 'VisitController@edit')->name('showVisitEdit')->middleware('auth');
 
-Route::post('visit/edit', 'VisitController@update')->name('visitEdit')->middleware('auth');
+Route::post('visit/update', 'VisitController@update')->name('visitUpdate')->middleware('auth');
 
 
 Route::get('family/visualize', 'DataController@visualize')->name('FamilyVisualize')->middleware('auth');

@@ -216,10 +216,20 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" id="incomeSrcDiv">
                                 <label for="incomeSrc" lang="ar"><strong>مصدر الدخل</strong></label>
-                                <input class="form-control" placeholder="e.g. agencies" name="incomeSrc" type="text"
-                                       id="incomeSrc" value="{{$family->incomeSrc}}" required>
+                                {{--                                <input class="form-control" placeholder="e.g. agencies" name="incomeSrc" type="text"--}}
+                                {{--                                       id="incomeSrc" required value="{{old('incomeSrc')}}">--}}
+
+                                <select name="incomeSrc" id="incomeSrc" class="form-control" required>
+                                    <option value="header" disabled="disabled" selected>اختر مصدر الدخل</option>
+                                    <option value="شؤون" {{$family->incomeSrc == "شؤون"? "selected" :""}}>شؤون</option>
+                                    <option value="زكاة" {{$family->incomeSrc == "زكاة"? "selected" :""}}>زكاة</option>
+                                    <option value="وكالة" {{$family->incomeSrc == "وكالة"? "selected" :""}}>وكالة
+                                    </option>
+                                    <option value="أسرى" {{$family->incomeSrc == "أسرى"? "selected" :""}}>أسرى</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
                             </div>
 
 
@@ -608,7 +618,7 @@
             x.setAttribute("type", "date");
             x.setAttribute("name", ("b_" + i));
             x.classList.add("form-control");
-            x.style.marginTop="5px";
+            x.style.marginTop = "5px";
 
             x.value = bAges[i - 1];
 
@@ -616,19 +626,80 @@
 
         }
 
-        for (var i = 1; i <= girlsNum; i++) {
+        for (i = 1; i <= girlsNum; i++) {
 
             x = document.createElement("INPUT");
             x.setAttribute("type", "date");
             x.setAttribute("name", ("g_" + i));
             x.classList.add("form-control");
-            x.style.marginTop="5px";
+            x.style.marginTop = "5px";
 
             x.value = gAges[i - 1];
 
             boysAgesDiv.appendChild(x);
 
         }
+
+
+        document.getElementById('incomeSrc').addEventListener("change", function () {
+
+
+            var div = document.getElementById('incomeSrcDiv');
+            var incomeSrc = document.getElementById('incomeSrc');
+            var value = incomeSrc.options[incomeSrc.selectedIndex].value;
+
+            if (value == "أخرى") {
+
+                x = document.createElement("INPUT");
+                x.setAttribute("type", "text");
+                x.setAttribute("name", "incomeSrcOther");
+                x.setAttribute("placeholder", "الرجاء إدخال مصدر الدخل ");
+                x.classList.add("form-control");
+                x.classList.add("col-md-6");
+                x.style.marginTop = "10px";
+                x.setAttribute("id", "other");
+                x.required= true;
+
+
+                div.appendChild(x);
+            } else {
+
+                var other = document.getElementById('other');
+
+                if (other != null)
+                    div.removeChild(other);
+
+            }
+
+        });
+
+
+        var income = "{{$family->incomeSrc}}";
+
+        if (income != "وكالة" && income != "شؤون" && income != "أسرى" && income != "زكاة") {
+
+            var div = document.getElementById('incomeSrcDiv');
+            var incomeSrc = document.getElementById('incomeSrc');
+            incomeSrc.selectedIndex = 5;
+            var value = incomeSrc.options[incomeSrc.selectedIndex].value;
+
+            x = document.createElement("INPUT");
+            x.setAttribute("type", "text");
+            x.setAttribute("name", "incomeSrcOther");
+            x.setAttribute("placeholder", "الرجاء إدخال مصدر الدخل ");
+            x.classList.add("form-control");
+            x.classList.add("col-md-6");
+            x.style.marginTop = "10px";
+            x.setAttribute("id", "other");
+            x.required= true;
+            x.setAttribute("value", income);
+
+
+            div.appendChild(x);
+
+
+        }
+
 
     </script>
 

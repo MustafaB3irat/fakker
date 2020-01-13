@@ -51,6 +51,7 @@
                                         <select name="dataType" id="dataType" class="form-control">
                                             <option value="area" selected>المنطقة</option>
                                             <option value="state">الحالة الإجتماعية</option>
+                                            <option value="deserve">الاستحقاق</option>
                                         </select>
                                     </div>
 

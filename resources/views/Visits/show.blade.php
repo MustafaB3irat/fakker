@@ -44,6 +44,7 @@
 
 
                 <input type="hidden" value="{{$FamilyID}}" name="id">
+
             </form>
 
 
@@ -91,6 +92,7 @@
 
 
                             <input type="hidden" name="id" value="{{$FamilyID}}">
+                            <input type="hidden" name="deserve" value="{{$deserve}}">
 
                             <div class="row">
 
@@ -185,7 +187,8 @@
                                 <small>{{\Carbon\Carbon::parse($visit->updated_at)->diffForHumans()}}</small>
                                 <hr>
 
-                                <a href="edit/{{$visit->id}}" class="fas fa-edit" style="margin: 0 auto"
+                                <a href="{{route('showVisitEdit' , [$visit->id , $deserve])}}" class="fas fa-edit"
+                                   style="margin: 0 auto"
                                    lang="ar">تعديل</a>
 
                             </div>

@@ -15,7 +15,6 @@ class VisitController extends Controller
     public function index($id, $deserve)
     {
 
-
         $visits = Visit::query()->orderBy('date', 'desc')->where('family_id', $id)->paginate(8);
 
         return view('Visits.show')->with('Visits', $visits)->with('FamilyID', $id)->with('deserve', $deserve);
@@ -41,7 +40,7 @@ class VisitController extends Controller
             ]
         );
 
-        return redirect('visit/' . $request->input('family_id'))->with("success", "success");
+        return redirect('visit/' . $request->input('family_id') . '/' . $request->input('deserve'))->with("success", "success");
 
     }
 
@@ -75,17 +74,18 @@ class VisitController extends Controller
         $visit->save();
 
 
-        return redirect('/visit/' . $request->input('id'))->with('success', 'added Successfuly');
+        return redirect('/visit/' . $request->input('family_id').'/'.$request->input('deserve'))->with('success', 'added Successfuly');
 
     }
 
 
-    public function edit($id)
+    public function edit($id, $deserve)
     {
 
         $visit = Visit::query()->find($id);
 
-        return view("Visits.edit")->with("visit", $visit);
+
+        return view("Visits.edit")->with("visit", $visit)->with('deserve' , $deserve);
 
     }
 

@@ -33,6 +33,8 @@
 
                         <input type="hidden" name="id" value="{{$visit->id}}">
 
+                        <input type="hidden" name="deserve" value="{{$deserve}}">
+
                         <div class="row">
 
 

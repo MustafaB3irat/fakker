@@ -194,10 +194,19 @@
                             </div>
 
 
-                            <div class="form-group">
+                            <div class="form-group" id="incomeSrcDiv">
                                 <label for="incomeSrc" lang="ar"><strong>مصدر الدخل</strong></label>
-                                <input class="form-control" placeholder="e.g. agencies" name="incomeSrc" type="text"
-                                       id="incomeSrc" required value="{{old('incomeSrc')}}">
+                                {{--                                <input class="form-control" placeholder="e.g. agencies" name="incomeSrc" type="text"--}}
+                                {{--                                       id="incomeSrc" required value="{{old('incomeSrc')}}">--}}
+
+                                <select name="incomeSrc" id="incomeSrc" class="form-control" required>
+                                    <option value="header" disabled="disabled" selected>اختر مصدر الدخل</option>
+                                    <option value="شؤون" {{old('incomeSrc') == "شؤون"? "selected" :""}}>شؤون</option>
+                                    <option value="زكاة" {{old('incomeSrc') == "زكاة"? "selected" :""}}>زكاة</option>
+                                    <option value="وكالة" {{old('incomeSrc') == "وكالة"? "selected" :""}}>وكالة</option>
+                                    <option value="أسرى" {{old('incomeSrc') == "أسرى"? "selected" :""}}>أسرى</option>
+                                    <option value="أخرى">أخرى</option>
+                                </select>
                             </div>
 
 
@@ -476,6 +485,34 @@
 
     <script type="text/javascript">
 
+
+        var income = "{{old('incomeSrc')}}";
+
+        if (income != "" && income != "وكالة" && income != "شؤون" && income != "أسرى" && income != "زكاة") {
+
+            var div = document.getElementById('incomeSrcDiv');
+            var incomeSrc = document.getElementById('incomeSrc');
+            incomeSrc.selectedIndex = 5;
+            var value = incomeSrc.options[incomeSrc.selectedIndex].value;
+
+
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "text");
+            x.setAttribute("name", "incomeSrcOther");
+            x.setAttribute("placeholder", "الرجاء إدخال مصدر الدخل ");
+            x.classList.add("form-control");
+            x.classList.add("col-md-6");
+            x.style.marginTop = "10px";
+            x.setAttribute("id", "other");
+            x.setAttribute("value", income);
+            x.required = true;
+
+            div.appendChild(x);
+
+
+        }
+
+
         document.getElementById('boysNum').addEventListener("keyup", function () {
 
             var num = document.getElementById('boysNum').value;
@@ -574,6 +611,39 @@
             document.getElementById('yes_label3').classList.add('btn-danger');
             document.getElementById('no_label3').classList.remove('btn-danger');
             document.getElementById('no_label3').classList.add('btn-success');
+
+        });
+
+
+        document.getElementById('incomeSrc').addEventListener("change", function () {
+
+            var div = document.getElementById('incomeSrcDiv');
+            var incomeSrc = document.getElementById('incomeSrc');
+            var value = incomeSrc.options[incomeSrc.selectedIndex].value;
+
+            if (value == "أخرى") {
+
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "text");
+                x.setAttribute("name", "incomeSrcOther");
+                x.setAttribute("placeholder", "الرجاء إدخال مصدر الدخل ");
+                x.classList.add("form-control");
+                x.classList.add("col-md-6");
+                x.style.marginTop = "10px";
+                x.setAttribute("id", "other");
+                x.required = true;
+
+
+                div.appendChild(x);
+            } else {
+
+                var other = document.getElementById('other');
+
+                if (other != null)
+                    div.removeChild(other);
+
+            }
+
 
         });
 

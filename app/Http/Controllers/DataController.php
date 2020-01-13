@@ -68,6 +68,10 @@ class DataController extends Controller
             'girlsNum' => 'required',
         ]);
 
+        $incomeSrc = $request->input('incomeSrcOther');
+        if ($incomeSrc == null || $incomeSrc == "")
+            $incomeSrc = $request->input('incomeSrc');
+
 
         $i = 1;
         $boysAges = "---";
@@ -126,7 +130,7 @@ class DataController extends Controller
         $family->state = $request->input('state');
         $family->motherWork = $request->input('motherWork');
         $family->workState = $request->input('workState');
-        $family->incomeSrc = $request->input('incomeSrc');
+        $family->incomeSrc = $incomeSrc;
         $family->boysNum = $request->input('boysNum');
         $family->boysAges = $boysAges;
         $family->girlsNum = $request->input('girlsNum');
@@ -328,6 +332,12 @@ class DataController extends Controller
         $studentDetails = "---";
         $sicknessDetails = "---";
 
+
+        $incomeSrc = $request->input('incomeSrcOther');
+        if ($incomeSrc == null || $incomeSrc == "")
+            $incomeSrc = $request->input('incomeSrc');
+
+
         if ($request->input('assuranceType') != "")
             $assuranceType = $request->input('assuranceType');
 
@@ -402,7 +412,7 @@ class DataController extends Controller
             'sicknessDetails' => $sicknessDetails,
             'isThereUniStudent' => $request->input('isThereUniStudent'),
             'studentDetails' => $studentDetails,
-            'incomeSrc' => $request->input('incomeSrc'),
+            'incomeSrc' => $incomeSrc,
             'boysNum' => $request->input('boysNum'),
             'girlsNum' => $request->input('girlsNum'),
             'boysAges' => $boysAges,
@@ -565,9 +575,16 @@ class DataController extends Controller
 
         if ($dataType == "state")
             $datasetName = "الحالة الإجتماعية";
+        else if ($dataType == "deserve")
+            $datasetName = "الإستحقاق";
 
 
-        $chart->labels($data->keys());
+        if ($dataType != "deserve")
+            $chart->labels($data->keys());
+        else
+            $chart->labels(['لا يستحق', 'يستحق']);
+
+
         $chart->dataset(" تصنيف حسب " . $datasetName, $chartType, $data->values());
 
         return view('Family.FamilyVisualization')->with('chart', $chart);
