@@ -15,9 +15,11 @@ class VisitController extends Controller
     public function index($id, $deserve)
     {
 
+        $family = Family::query()->find($id);
+
         $visits = Visit::query()->orderBy('date', 'desc')->where('family_id', $id)->paginate(8);
 
-        return view('Visits.show')->with('Visits', $visits)->with('FamilyID', $id)->with('deserve', $deserve);
+        return view('Visits.show', ['Visits' => $visits, 'FamilyID' => $id, 'family' => $family, 'deserve'=>$deserve]);
 
     }
 
@@ -65,6 +67,7 @@ class VisitController extends Controller
 
         $visit = new Visit;
 
+
         $visit->family_id = $request->input('id');
         $visit->date = $request->input('date');
         $visit->notes = $request->input('notes');
@@ -74,7 +77,7 @@ class VisitController extends Controller
         $visit->save();
 
 
-        return redirect('/visit/' . $request->input('family_id').'/'.$request->input('deserve'))->with('success', 'added Successfuly');
+        return redirect('visit/' . $request->input('id') . '/' . $request->input('deserve'))->with('success', 'added Successfuly');
 
     }
 
@@ -85,7 +88,7 @@ class VisitController extends Controller
         $visit = Visit::query()->find($id);
 
 
-        return view("Visits.edit")->with("visit", $visit)->with('deserve' , $deserve);
+        return view("Visits.edit")->with("visit", $visit)->with('deserve', $deserve);
 
     }
 

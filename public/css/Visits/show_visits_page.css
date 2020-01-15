@@ -10,3 +10,10 @@ label, labels {
     float: right;
 }
 
+#familyName {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin: 20px;
+}
+
