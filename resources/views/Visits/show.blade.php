@@ -10,6 +10,10 @@
 
 @section('content')
 
+    <div id="familyName" class="row">
+        <h3 style="text-align: center" lang="ar"> زيارات عائلة {{$family->name}} </h3>
+    </div>
+
 
     <div class="row" id="header">
 
