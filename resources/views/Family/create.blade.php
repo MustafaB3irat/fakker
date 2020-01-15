@@ -451,7 +451,7 @@
                                     <div class="form-group">
                                         <label for="sicknessDetails" lang="ar"><strong>نوع المرض أو
                                                 الدواء</strong></label>
-                                        <input class="form-control" placeholder="e.g. ID, University"
+                                        <input class="form-control" placeholder="e.g insulin"
                                                name="sicknessDetails"
                                                type="text" id="sicknessDetails" value="{{old('sicknessDetails')}}">
                                     </div>
